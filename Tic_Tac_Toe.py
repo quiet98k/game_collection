@@ -2,15 +2,15 @@ import tkinter as tk
 import tkinter.messagebox as messagebox
 
 
-class TicTacToe:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Tic Tac Toe")
+class TicTacToe(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.parent = parent
         self.current_player = 'X'  # Start game with player X
         self.buttons = [[None for a in range(3)] for _ in range(3)]
         for i in range(3):
             for j in range(3):
-                self.buttons[i][j] = tk.Button(root, text=' ', font=('Arial', 24), height=2, width=5,
+                self.buttons[i][j] = tk.Button(self, text=' ', font=('Arial', 24), height=2, width=5,
                                                command=lambda i=i, j=j: self.on_button_click(i, j), bg='white',
                                                fg='black')
                 self.buttons[i][j].grid(row=i, column=j)
@@ -64,6 +64,6 @@ class TicTacToe:
 
 
 # Create the main application window
-root = tk.Tk()
-game = TicTacToe(root)
-root.mainloop()
+# root = tk.Tk()
+# game = TicTacToe(root)
+# root.mainloop()

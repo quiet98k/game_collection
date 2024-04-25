@@ -2,16 +2,17 @@ import random
 import tkinter as tk
 
 
-class Sudoku:
-    def __init__(self, root):
+class Sudoku(tk.Frame):
+    def __init__(self, parent):
         """ Constructor for Sudoku """
-        self.root = root
-        self.root.title("Sudoku")
+        super().__init__(parent)
+        self.parent = parent
+        # self.root.title("Sudoku")
         self.grid = [[tk.Entry for a in range(9)] for _ in range(9)]
         for i in range(9):
             for j in range(9):
-                self.grid[i][j] = tk.Entry(root, width=2, font=('Courier', 40), justify='center', validate="key",
-                                           validatecommand=(root.register(self.on_validate), '%P', str(i), str(j)))
+                self.grid[i][j] = tk.Entry(self, width=2, font=('Courier', 40), justify='center', validate="key",
+                                        validatecommand=(self.register(self.on_validate), '%P', str(i), str(j)))
                 self.grid[i][j].grid(row=i, column=j, sticky="nsew")
                 if i % 3 == 0:  # Add thicker top border on new 3x3 blocks
                     self.grid[i][j].grid(pady=(5, 1))
@@ -126,7 +127,6 @@ class Sudoku:
             for j in range(9):
                 self.grid[i][j].config(bg='white')
 
-
-root = tk.Tk()
-game = Sudoku(root)
-root.mainloop()
+# root = Tk()
+# game = Sudoku(root)
+# root.mainloop()
