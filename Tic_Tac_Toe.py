@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.messagebox as messagebox
 
+
 class TicTacToe:
     def __init__(self, root):
         self.root = root
@@ -10,7 +11,8 @@ class TicTacToe:
         for i in range(3):
             for j in range(3):
                 self.buttons[i][j] = tk.Button(root, text=' ', font=('Arial', 24), height=2, width=5,
-                                               command=lambda i=i, j=j: self.on_button_click(i, j), bg='white', fg='black')
+                                               command=lambda i=i, j=j: self.on_button_click(i, j), bg='white',
+                                               fg='black')
                 self.buttons[i][j].grid(row=i, column=j)
 
     def on_button_click(self, i, j):
@@ -30,21 +32,21 @@ class TicTacToe:
         for i in range(3):
             if self.buttons[i][0]['text'] == self.buttons[i][1]['text'] == self.buttons[i][2]['text'] != ' ':
                 for j in range(3):
-                    self.buttons[i][j].config(bg='red')
+                    self.buttons[i][j].config(bg='green')
                 return True
             if self.buttons[0][i]['text'] == self.buttons[1][i]['text'] == self.buttons[2][i]['text'] != ' ':
                 for j in range(3):
-                    self.buttons[j][i].config(bg='red')
+                    self.buttons[j][i].config(bg='green')
                 return True
         # Check diagonals
         if self.buttons[0][0]['text'] == self.buttons[1][1]['text'] == self.buttons[2][2]['text'] != ' ':
             for j in range(3):
-                self.buttons[j][j].config(bg='red')
+                self.buttons[j][j].config(bg='green')
             return True
         if self.buttons[0][2]['text'] == self.buttons[1][1]['text'] == self.buttons[2][0]['text'] != ' ':
-            self.buttons[0][2].config(bg='red')
-            self.buttons[1][1].config(bg='red')
-            self.buttons[2][0].config(bg='red')
+            self.buttons[0][2].config(bg='green')
+            self.buttons[1][1].config(bg='green')
+            self.buttons[2][0].config(bg='green')
             return True
         return False
 
@@ -59,6 +61,7 @@ class TicTacToe:
                 self.buttons[i][j].config(text=' ')
                 self.buttons[i][j].config(bg='white')
         self.current_player = 'X'  # X starts the new game
+
 
 # Create the main application window
 root = tk.Tk()
