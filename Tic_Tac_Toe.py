@@ -63,7 +63,3 @@ class TicTacToe(tk.Frame):
         self.current_player = 'X'  # X starts the new game
 
 
-# Create the main application window
-# root = tk.Tk()
-# game = TicTacToe(root)
-# root.mainloop()

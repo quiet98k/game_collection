@@ -15,3 +15,28 @@ Sudoku is a number-placement puzzle where players fill a 9x9 grid with numbers s
 ### Tic-Tac-Toe
 A simple yet engaging game where two players take turns marking the spaces in a 3×3 grid, with the goal of placing three of their marks in a horizontal, vertical, or diagonal pattern.
 - **Code File**: [Tic_Tac_Toe.py](./Tic_Tac_Toe.py)
+
+## Installation and Setup
+
+Before running the games, ensure you have Python installed on your system. You can download Python [here](https://www.python.org/downloads/).
+
+Clone the repository to your local machine:
+```bash
+git clone https://github.com/quiet98k/game_collection.git
+```
+Navigate to the game directory you wish to play, for example:
+```bash
+cd game_collection
+```
+## Usage
+
+To play the games in this collection, you will run the `main.py` script, which is the central entry point for all games.
+
+Navigate to the root directory of the game collection, and then execute `main.py` using Python from your command line:
+
+```bash
+cd game_collection  # Change directory to your cloned repository
+python main.py
+```
+
+
