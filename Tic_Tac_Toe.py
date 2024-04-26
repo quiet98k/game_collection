@@ -7,13 +7,13 @@ class TicTacToe(tk.Frame):
         super().__init__(parent)
         self.parent = parent
         self.current_player = 'X'  # Start game with player X
-        self.buttons = [[None for a in range(3)] for _ in range(3)]
+        self.buttons = [[tk.Button for a in range(3)] for _ in range(3)]
         for i in range(3):
             for j in range(3):
-                self.buttons[i][j] = tk.Button(self, text=' ', font=('Arial', 24), height=2, width=5,
+                self.buttons[i][j] = tk.Button(self, text=' ', font=('Arial', 47), height=2, width=5,
                                                command=lambda i=i, j=j: self.on_button_click(i, j), bg='white',
                                                fg='black')
-                self.buttons[i][j].grid(row=i, column=j)
+                self.buttons[i][j].grid(row=i, column=j, sticky="nsew")
 
     def on_button_click(self, i, j):
         if self.buttons[i][j]['text'] == ' ' and not self.check_winner():
