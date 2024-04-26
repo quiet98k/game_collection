@@ -44,7 +44,7 @@ class Sudoku(tk.Frame):
         """ Get a value from the grid as String"""
         return self.gameGrid[row][col].get()
 
-    def initializeSudoku(self, level=0):
+    def initializeSudoku(self, level=3):
         """initialize the Sudoku board"""
         def init_Internal(row, col):
             if row == 9:  # If the last row is completed, puzzle is complete
