@@ -1,35 +1,51 @@
 import random
 import tkinter as tk
 from tkinter import messagebox
+import customtkinter as ctk
+
+default_color_1 = "#e8e8e8"
+default_color_2 = "#b7b7b7"
+
+class Sudoku(ctk.CTkFrame):
 
 
-class Sudoku(tk.Frame):
     def __init__(self, parent):
         """ Constructor for Sudoku """
         super().__init__(parent)
         self.parent = parent
-        self.gameGrid = [[tk.Entry for a in range(9)] for _ in range(9)]
+        self.gameGrid = [[None for _ in range(9)] for _ in range(9)]
+        self.configure(fg_color='#525252', width=900, height=900)
 
-        # Create a Frame to hold the grid and the button
-        grid_frame = tk.Frame(self)
-        grid_frame.pack(side="top", fill="both", expand=True)
+        # Create a Frame to hold all the 3x3 subgrid frames
+        main_grid_frame = ctk.CTkFrame(self, fg_color='black', border_width=2)
+        main_grid_frame.pack( fill="both", expand=True)
 
+        # Creating 9 subgrid frames
+        subgrid_frames = [[ctk.CTkFrame(main_grid_frame, fg_color='black', border_width=1, width=300, height=300) for _ in range(3)] for _ in range(3)]
+        for row in range(3):
+            for col in range(3):
+                subgrid_frames[row][col].grid(row=row, column=col, padx=1, pady=1, sticky="nsew")
+
+        # Initialize all entries in each subgrid
         for i in range(9):
             for j in range(9):
-                self.gameGrid[i][j] = tk.Entry(grid_frame, width=2, font=('Courier', 40), justify='center',
-                                               validate="key",
-                                               validatecommand=(self.register(self.on_validate), '%P', str(i), str(j)))
-                self.gameGrid[i][j].grid(row=i, column=j, sticky="nsew")
-                if i % 3 == 0:  # Add thicker top border on new 3x3 blocks
-                    self.gameGrid[i][j].grid(pady=(5, 1))
-                if j % 3 == 0:  # Add thicker left border on new 3x3 blocks
-                    self.gameGrid[i][j].grid(padx=(5, 1))
+                subgrid_row, subgrid_col = i // 3, j // 3
+                self.gameGrid[i][j] = ctk.CTkEntry(subgrid_frames[subgrid_row][subgrid_col], width=100, height=100, font=('Courier', 40),
+                                                   justify='center', validate="key", validatecommand=(
+                        self.register(self.on_validate), '%P', i, j),
+                                                   fg_color="#e8e8e8", border_width=1, border_color="black",
+                                                   corner_radius=0, text_color="black")
+                self.gameGrid[i][j].grid(row=i % 3, column=j % 3, sticky="nsew")
 
         # Button to check the solution
-        self.check_button = tk.Button(self, text="Check Answer", command=self.check_answer)
+        self.check_button = ctk.CTkButton(self, text="Check Answer", command=self.check_answer, fg_color="#e8e8e8",
+                                          border_width=1, border_color="black",
+                                          hover_color="#b7b7b7", corner_radius=5, text_color="black",
+                                          width=900, height=50, font=('Courier', 40))
         self.check_button.pack(side="bottom", fill="x")
 
         self.initializeSudoku()
+
 
     def remove(self, row, col):
         """ Remove a cell from the Sudoku grid """
@@ -46,6 +62,7 @@ class Sudoku(tk.Frame):
 
     def initializeSudoku(self, level=3):
         """initialize the Sudoku board"""
+
         def init_Internal(row, col):
             if row == 9:  # If the last row is completed, puzzle is complete
                 return True
@@ -72,6 +89,14 @@ class Sudoku(tk.Frame):
             if self.get(i, j) != "":
                 self.set(i, j, "")
                 numToRemove -= 1
+        # disable all the nonempty cell
+        for row in range(9):
+            for col in range(9):
+                if self.get(row, col) != "":
+                    self.gameGrid[row][col].configure(state=tk.DISABLED)
+                    self.gameGrid[row][col].configure(fg_color="#b7b7b7")
+                else:
+                    self.gameGrid[row][col].configure(state=tk.NORMAL)
 
     def is_valid(self, row, col, num):
         """check if num is valid"""
@@ -101,11 +126,14 @@ class Sudoku(tk.Frame):
             self.restartGame(3)
         else:
             messagebox.showinfo("Result", "There are mistakes in your solution. Keep trying!")
+
     def restartGame(self, level):
         for row in range(9):
             for col in range(9):
                 self.set(row, col, "")
+                self.gameGrid[row][col].configure(state=tk.NORMAL, fg_color="#e8e8e8")
         self.initializeSudoku(level)
+
     def check_winner(self):
         """ Check if the Sudoku puzzle is correctly solved """
 
