@@ -5,9 +5,11 @@ import customtkinter as ctk
 
 default_color_1 = "#e8e8e8"
 default_color_2 = "#b7b7b7"
+default_color_3 = "#8c8c8c"
+default_color_4 = "#525252"
+
 
 class Sudoku(ctk.CTkFrame):
-
 
     def __init__(self, parent):
         """ Constructor for Sudoku """
@@ -17,11 +19,13 @@ class Sudoku(ctk.CTkFrame):
         self.configure(fg_color='#525252', width=900, height=900)
 
         # Create a Frame to hold all the 3x3 subgrid frames
-        main_grid_frame = ctk.CTkFrame(self, fg_color='black', border_width=2)
-        main_grid_frame.pack( fill="both", expand=True)
+        main_grid_frame = ctk.CTkFrame(self, fg_color=default_color_1, border_width=2)
+        main_grid_frame.pack(fill="both", expand=True)
 
         # Creating 9 subgrid frames
-        subgrid_frames = [[ctk.CTkFrame(main_grid_frame, fg_color='black', border_width=1, width=300, height=300) for _ in range(3)] for _ in range(3)]
+        subgrid_frames = [
+            [ctk.CTkFrame(main_grid_frame, fg_color=default_color_1, border_width=1, width=300, height=300) for _ in range(3)]
+            for _ in range(3)]
         for row in range(3):
             for col in range(3):
                 subgrid_frames[row][col].grid(row=row, column=col, padx=1, pady=1, sticky="nsew")
@@ -30,7 +34,8 @@ class Sudoku(ctk.CTkFrame):
         for i in range(9):
             for j in range(9):
                 subgrid_row, subgrid_col = i // 3, j // 3
-                self.gameGrid[i][j] = ctk.CTkEntry(subgrid_frames[subgrid_row][subgrid_col], width=100, height=100, font=('Courier', 40),
+                self.gameGrid[i][j] = ctk.CTkEntry(subgrid_frames[subgrid_row][subgrid_col], width=100, height=100,
+                                                   font=('Courier', 40),
                                                    justify='center', validate="key", validatecommand=(
                         self.register(self.on_validate), '%P', i, j),
                                                    fg_color="#e8e8e8", border_width=1, border_color="black",
@@ -45,7 +50,6 @@ class Sudoku(ctk.CTkFrame):
         self.check_button.pack(side="bottom", fill="x")
 
         self.initializeSudoku()
-
 
     def remove(self, row, col):
         """ Remove a cell from the Sudoku grid """

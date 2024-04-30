@@ -76,5 +76,5 @@ class TicTacToe(ctk.CTkFrame):
         for i in range(3):
             for j in range(3):
                 self.buttons[i][j].configure(text=' ')
-                self.buttons[i][j].configure(fg_color='#f8dddd')
+                self.buttons[i][j].configure(fg_color=default_color_1)
         self.current_player = 'X'  # X starts the new game

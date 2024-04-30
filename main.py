@@ -1,5 +1,7 @@
 import tkinter as tk
 import customtkinter as ctk
+
+from Minesweeper import Minesweeper
 from Sudoku import Sudoku
 from Tic_Tac_Toe import TicTacToe
 
@@ -30,7 +32,7 @@ class MainFrame(ctk.CTk):
         self.frames = {}
         game_names = []  # List to store game names
 
-        for GameClass in (Sudoku, TicTacToe):
+        for GameClass in (Sudoku, TicTacToe, Minesweeper):
             frame = GameClass(container)
             self.frames[GameClass.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -43,8 +45,8 @@ class MainFrame(ctk.CTk):
                                          dropdown_fg_color=default_color_1, dropdown_hover_color=default_color_2,
                                          dropdown_font=('Courier', 17), dropdown_text_color="black")
         self.game_list.pack(side="top")
-        self.game_list.set("Sudoku")  # Default selection
-        self.show_frame("Sudoku")  # Default show Sudoku
+        self.game_list.set("Minesweeper")  # Default selection
+        self.show_frame("Minesweeper")  # Default show Sudoku
 
     def show_frame(self, name):
         """Bring the selected game frame to the top for display."""

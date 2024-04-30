@@ -38,5 +38,15 @@ Navigate to the root directory of the game collection, and then execute `main.py
 cd game_collection  # Change directory to your cloned repository
 python main.py
 ```
+## To-Do List
+### Main-Frame
+- [ ] Add restart button
+- [ ] Load the Game only when selected
+- [ ] Add prompt words for games
+- [ ] Modify when game is done
+### Tic-Tac_toe
+- [ ] Allow Player to choose side
+### Sudoku
+- [ ] Allow selecting difficulty and reset
 
 
