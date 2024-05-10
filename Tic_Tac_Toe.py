@@ -23,12 +23,12 @@ class TicTacToe(ctk.CTkFrame):
                                                    fg_color=default_color_1, border_width=1, border_color="black",
                                                    hover_color=default_color_2, corner_radius=0, text_color="black")
                 self.buttons[i][j].grid(row=i, column=j, sticky="nsew")
-        # Button to check the solution
-        self.check_button = ctk.CTkButton(self, text="Reset Game", command=self.reset_game, fg_color=default_color_1,
+        # Button to reset the game
+        self.reset_button = ctk.CTkButton(self, text="Reset Game", command=self.reset_game, fg_color=default_color_1,
                                           border_width=1, border_color="black",
                                           hover_color=default_color_2, corner_radius=5, text_color="black",
                                           width=900, height=50, font=('Courier', 40))
-        self.check_button.pack(side="bottom", fill="x")
+        self.reset_button.pack(side="bottom", fill="x")
 
     def on_button_click(self, i, j):
         if self.buttons[i][j].cget("text") == ' ' and not self.check_winner():
